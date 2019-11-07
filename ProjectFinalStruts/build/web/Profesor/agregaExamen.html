@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../src/css/index.css" />
+  <script src="https://unpkg.com/react/umd/react.production.js" crossorigin />
+  <script src="https://unpkg.com/react-dom/umd/react-dom.production.js" crossorigin/>
+    <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <title>Numeros de decimales en Administrador</title>
+</head>
+
+<body class="fondo-azulado">
+  <noscript>Necesitas habilitar JavaScript para ejecutar la aplicación.</noscript>
+  <div id="welcome"></div>
+  <hr>
+  <div id="navegaProfe"></div>
+  <br>
+  <div id="text">
+      <center>
+    <button id="muestraEjercicio" class="btn btn-info">Muestra ejercicios </button>
+    <br><br>
+      <input id="nombreExamen" type="text" placeholder="Ingresa el nombre del examen" class="form-control border-primary contenido-chico" name="nombre" />
+      <br><br>
+      <table id="demo" class="table table-hover table-dark contenido-mediano">
+      </table>
+        <br>
+        <input type="submit" class="btn btn-success" value="Guardar" onclick="generaExamen()"/>
+    </center>
+  </div>
+
+  <script>
+    document.getElementById("muestraEjercicio").addEventListener("click",cargarTabla);
+    function cargarTabla(){
+      var xhr=new XMLHttpRequest();
+      xhr.onreadystatechange=function(){
+        cargarXML(this);
+      };
+      xhr.open("GET","../xml/ejercicios.xml",true);
+      xhr.send();
+    }
+
+    function cargarXML(xml){
+      var docXML=xml.responseXML;
+      var tabla="<tr><th scope='col'>Seleccionar</th><th scope='col'>Nombre del ejercicio</th><th scope='col'>Acción</th></tr>"
+      var ejercicio=docXML.getElementsByTagName("ejercicio");
+      for(var i=0;i<ejercicio.length;i++){
+        tabla+="<tr><th socpe='row'>";
+        tabla+="<center><input type='checkbox' class='form-check-input' value='"+(i+1)+"' /></center>";
+        tabla+="</th><td>";
+        tabla+=ejercicio[i].getAttribute("nombre");
+        tabla+="</td>";
+        tabla+="<td><a type='button' href='infoEjercicio.html?numero="+(i+1)+"' class='btn btn-primary'>Ver ejercicio</a>";
+        tabla+="</td></tr>"
+      }
+      document.getElementById("demo").innerHTML=tabla;
+    }
+
+    function generaExamen(){
+        var nombre=document.getElementById("nombreExamen").value;
+        alert(nombre)
+        var input=document.getElementsByTagName("input");
+        var seleccionados= new Array()
+        for(i=0;i<input.length;i++){
+          if(input[i].checked==true){
+            seleccionados.push(input[i])
+          }
+        }
+        console.log("Imprimiendo los seleccionados")
+        console.log(seleccionados.length)
+        var numeros="";
+        for(i=0;i<seleccionados.length;i++){
+            if(i===0)
+                numeros+=seleccionados[i].value;
+            else{
+                numeros+=",";
+                numeros+=seleccionados[i].value;
+            }
+        }
+        console.log(numeros)
+        creaExamen(numeros,nombre);
+    }
+    
+    function creaExamen(numeros,nombre){
+        console.log("Numeros: "+numeros)
+        //http://localhost/struts2react/input1.jsp
+        let url = 'http://localhost:8080/ProjectFinalStruts/AgregaExamen?numeros='+numeros+'&nombre='+nombre;
+        alert('URL:' + url);
+        fetch(url).then(response => response.text()).then(data => {
+            alert(data);
+            
+        });
+    }
+
+  </script>
+
+  <div id="alerta">
+    
+  </div>
+<script type="text/javascript" src="js_react/addEx.js"></script></body>
+</html>

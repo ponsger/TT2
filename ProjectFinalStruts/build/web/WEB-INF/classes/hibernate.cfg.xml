@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/trabajoterminal?serverTimezone=UTC&amp;autoReconnect=true&amp;useSSL=false</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">rodo</property>
+    <property name="hibernate.connection.pool_size">10</property>
+    <mapping resource="entitys/Usuario.hbm.xml"/>
+    <mapping resource="entitys/Tipousuario.hbm.xml"/>
+    <mapping resource="entitys/Grupo.hbm.xml"/>
+    <mapping resource="entitys/Profesor.hbm.xml"/>
+    <mapping resource="entitys/Alumno.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

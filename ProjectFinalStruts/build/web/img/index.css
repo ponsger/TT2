@@ -1,0 +1,21 @@
+.nube{
+    background-repeat: repeat;
+    background-size: 150px 150px;
+    background-position-x: right;
+    background-image: url("img/nubes.png");
+    background-color: #0099F7;
+}
+
+.signos{
+    background-repeat: repeat;
+    background-size: 20%;
+    background-image: url("img/simbolos.jpg");
+}
+
+.jardin{
+    background-repeat: no-repeat;
+    background-size: 100%; 
+    background-position-y: 100px;
+    background-image: url("img/jardin.png");
+}
+

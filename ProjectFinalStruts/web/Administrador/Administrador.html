@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../src/css/index.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <script src="https://unpkg.com/react/umd/react.production.js" crossorigin />
+    <script src="https://unpkg.com/react-dom/umd/react-dom.production.js" crossorigin/>
+    <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin/>
+    <script>var Alert = ReactBootstrap.Alert;</script>
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>Numeros de decimales en Administrador</title>
+  </head>
+  <body class="fondo-azul-obscuro">
+    <noscript>Necesitas habilitar JavaScript para ejecutar la aplicación.</noscript>
+    <div id="welcome"></div>
+    <hr>
+    <div id="navega"></div>
+    <br>
+    <div id="text">
+            <h1>Leer de un json</h1>
+            <button onclick="loadDoc()">Carga json</button>
+        </div>
+        <script>
+            function loadDoc() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    myFunction(this);
+                }
+                };
+                xhttp.open("GET", "listadoPaises.json", true);
+                xhttp.send();
+            }
+            function myFunction(json) {
+                var jsonDoc = json.response;
+                var json= JSON.parse(jsonDoc);
+                console.log(json)
+                var paises=json.listadoPaises;
+                console.log(paises)
+                
+                
+                var pais=paises.pais[0];
+                console.log(pais);
+                pais=paises.pais[1].textoCapital;
+                console.log(pais);
+            }
+            
+        </script>
+  <script type="text/javascript" src="js_react/administrador.js"></script></body>
+</html>

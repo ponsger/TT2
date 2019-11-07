@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/10/2019 05:16:54 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entitys.Usuario" table="usuario" catalog="trabajoterminal">
+        <id name="idUsuario" type="java.lang.Integer">
+            <column name="idUsuario" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="tipousuario" class="entitys.Tipousuario" fetch="select">
+            <column name="idTipoUsuario" />
+        </many-to-one>
+        <property name="nombres" type="string">
+            <column name="Nombres" length="45" />
+        </property>
+        <property name="apellidoPat" type="string">
+            <column name="Apellido_Pat" length="45" />
+        </property>
+        <property name="apellidoMat" type="string">
+            <column name="Apellido_Mat" length="45" />
+        </property>
+        <property name="nombreUsuario" type="string">
+            <column name="NombreUsuario" length="45" />
+        </property>
+        <property name="contrasena" type="string">
+            <column name="contrasena" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

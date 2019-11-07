@@ -1,0 +1,72 @@
+create database TrabajoTerminal;
+use TrabajoTerminal;
+
+CREATE TABLE  Tipo (
+  idTipo INT NOT NULL AUTO_INCREMENT,
+  Tipo VARCHAR(45) NULL,
+  PRIMARY KEY (idTipo))
+ENGINE = InnoDB;
+
+CREATE TABLE  Usuario (
+  idUsuario INT NOT NULL AUTO_INCREMENT,
+  Nombre VARCHAR(45) NULL,
+  Ap_Paterno VARCHAR(45) NULL,
+  Ap_Mat VARCHAR(45) NULL,
+  NombreUsuario VARCHAR(45) NULL,
+  Contrasena VARCHAR(45) NULL,
+  idTipo INT NULL,
+  PRIMARY KEY (idUsuario),
+  INDEX fk_Usuario_Tipo1_idx (idTipo ASC),
+  CONSTRAINT fk_Usuario_Tipo1
+    FOREIGN KEY (idTipo)
+    REFERENCES Tipo (idTipo)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB;
+
+CREATE TABLE  Profesor (
+  idUsuario INT NOT NULL,
+  RutaXMLPreguntas VARCHAR(45) NULL,
+  RutaXMLEjercicios VARCHAR(45) NULL,
+  RutaXMLExamen VARCHAR(45) NULL,
+  PRIMARY KEY (idUsuario),
+  CONSTRAINT fk_Profesor_Usuario
+    FOREIGN KEY (idUsuario)
+    REFERENCES Usuario (idUsuario)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB;
+
+CREATE TABLE  Grupo (
+  idGrupo INT NOT NULL AUTO_INCREMENT,
+  Nombre VARCHAR(45) NULL,
+  Ano INT NULL,
+  Turno VARCHAR(45) NULL,
+  RutaXMLAsignados VARCHAR(45) NULL,
+  idProfesor INT NOT NULL,
+  PRIMARY KEY (idGrupo),
+  INDEX fk_Grupo_Profesor1_idx (idProfesor ASC),
+  CONSTRAINT fk_Grupo_Profesor1
+    FOREIGN KEY (idProfesor)
+    REFERENCES Profesor (idUsuario)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB;
+
+CREATE TABLE  Alumno (
+  idGrupo INT NOT NULL,
+  RutaXMLRespuestas VARCHAR(45) NULL,
+  idUsuario INT NOT NULL,
+  PRIMARY KEY (idUsuario),
+  INDEX fk_Alumno_Grupo1_idx (idGrupo ASC),
+  CONSTRAINT fk_Alumno_Usuario1
+    FOREIGN KEY (idUsuario)
+    REFERENCES Usuario (idUsuario)
+    ON DELETE cascade
+    ON UPDATE cascade,
+  CONSTRAINT fk_Alumno_Grupo1
+    FOREIGN KEY (idGrupo)
+    REFERENCES Grupo (idGrupo)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB;

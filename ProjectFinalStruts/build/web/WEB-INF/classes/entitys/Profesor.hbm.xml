@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/10/2019 05:16:54 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entity.Profesor" table="profesor" catalog="trabajoterminal" optimistic-lock="version">
+        <id name="idUsuario" type="int">
+            <column name="idUsuario" />
+            <generator class="foreign">
+                <param name="property">usuario</param>
+            </generator>
+        </id>
+        <one-to-one name="usuario" class="Entity.Usuario" constrained="true"></one-to-one>
+        <property name="rutaXmlpreguntas" type="string">
+            <column name="RutaXMLPreguntas" length="45" />
+        </property>
+        <property name="rutaXmlejercicios" type="string">
+            <column name="RutaXMLEjercicios" length="45" />
+        </property>
+        <property name="rutaXmlexamen" type="string">
+            <column name="RutaXMLExamen" length="45" />
+        </property>
+        <set name="grupos" table="grupo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idProfesor" not-null="true" />
+            </key>
+            <one-to-many class="Entity.Grupo" />
+        </set>
+    </class>
+</hibernate-mapping>

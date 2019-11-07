@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejercicios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Users/Irma%20Pons/Documents/xml/datos%20bien/esquemaEjercicio.xsd">
+  <ejercicio numero="1" tipo="Ordena" nombre="Ordena los números decimales">
+    <indicaciones>Ordena los numeros de mayor a menor de arriba hacia abajo</indicaciones>
+    <opcion>0.69</opcion>
+    <opcion>0.65</opcion>
+    <opcion>0.32</opcion>
+    <opcion>0.66</opcion>
+    <resultado>1,4,2,3</resultado>
+  </ejercicio>
+  
+  <ejercicio numero="2" tipo="Ordena" nombre="Ordena números enteros con decimales">
+    <indicaciones>Pinta de cualquier color el numero mas grande</indicaciones>
+    <opcion>2.54</opcion>
+    <opcion>3.45</opcion>
+    <opcion>5.32</opcion>
+    <opcion>1.01</opcion>
+    <resultado>3,2,1,4</resultado>
+  </ejercicio>
+  
+  <ejercicio numero="3" tipo="Ordena" nombre="Acomoda las fracciones de mayor a menor">
+    <indicaciones>Acomoda de menor a mayor</indicaciones>
+    <opcion>1/100</opcion>
+    <opcion>1/10</opcion>
+    <opcion>1/50</opcion>
+    <opcion>1/1</opcion>
+    <resultado>4,2,3,1</resultado>
+  </ejercicio>
+  
+</ejercicios>
+
+

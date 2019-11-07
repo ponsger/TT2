@@ -1,0 +1,23 @@
+<Repuestas>
+    <Examenes>
+        <Examen numero="1" fecha="2019-02-11" nombre="Segundo Parcial">
+            <Ejercicio numero="3">2,4,1,3</Ejercicio>
+            <Pregunta numero="2" tipo="V-F">Verdadero</Pregunta>
+            <Ejercicio numero="1">2,4,1,3</Ejercicio>
+            <Ejercicio numero="3">2,4,1,3</Ejercicio>
+        </Examen>
+        
+        <Examen numero="1" fecha="2019-02-11" nombre="Segundo Parcial">
+            <Ejercicio numero="3">2,4,1,3</Ejercicio>
+            <Pregunta numero="2" tipo="V-F">Verdadero</Pregunta>
+            <Ejercicio numero="1">2,4,1,3</Ejercicio>
+            <Ejercicio numero="3">2,4,1,3</Ejercicio>
+        </Examen>
+    </Examenes>
+
+    <Ejercicios>
+        <Ejercicio numero="2">3,2,1,4</Ejercicio>
+        <Ejercicio numero="2">3,2,1,4</Ejercicio>
+    </Ejercicios>
+    
+</Repuestas>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../src/css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <title>Numeros de decimales en Administrador</title>
+  </head>
+
+  <body class="fondo-azulado">
+    <noscript
+      >Necesitas habilitar JavaScript para ejecutar la aplicación.</noscript
+    >
+    <div id="welcome"></div>
+    <div class="card align-items-center chico">
+      <a class="btn btn-light" href="verExamen.html">Mostrar Examenes</a>
+      <a class="btn btn-light" href="creaExamen.html">Crear examen</a>
+    </div>
+    <hr />
+    <button onclick="cargaDatos()" class="btn btn-secondary card text-primary form-control">Comenzar examen</button>
+    <br>
+    <center>
+      <div id="muestraExamen">
+        <div id="cuerpo">
+
+        </div>
+      </div>
+    </center>
+    <script>
+        function creaEventos(){
+            var dropTarget = document.querySelector(".wrapper");
+          dropTarget.addEventListener("dragover", function(event) {
+          event.preventDefault();
+      });
+      var draggables = document.querySelectorAll(".task");
+          for (let i = 0; i < draggables.length; i++) {
+            draggables[i].addEventListener("dragstart", function(ev) {
+            ev.dataTransfer.setData("srcId", ev.target.id);
+            });
+          }
+      
+
+      dropTarget.addEventListener("drop", function(event) {
+        event.preventDefault();
+        let target = event.target;
+        let droppable = target.classList.contains("box");
+        let srcId = event.dataTransfer.getData("srcId");
+        if (droppable) event.target.appendChild(document.getElementById(srcId));
+      });
+
+        }
+      
+      document.getElementById("muestraExamen").addEventListener("click", cargaDatos);
+      var nombre,ins,opcion1,opcion2,opcion3,opcion4,resultado;
+      var numero;
+      
+      function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+
+      function cargaDatos() {
+        numero = getParameterByName('numero');
+        cargarTodo(numero);
+      }
+
+      function cargarTodo(numero) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          cargarXML(this, numero);
+        };
+        xhr.open("GET", "../xml/examenes.xml", true);
+        xhr.send();
+      }
+
+      var respuestasCorrectas='';
+      let numeritoEjercicio=0;
+      function cargarXML(xml, num) {
+        var docXML = xml.responseXML;
+        var infoExamen = '';
+        var examen = docXML.getElementsByTagName("examen");
+        console.log("Elementos en memoria")
+        console.log(examen)
+        console.log(examen[num-1])
+        var nombre=examen[num-1].getAttribute("nombre");
+        var fecha=examen[num-1].getAttribute("fecha");
+        console.log("Nombre de examen: "+nombre)
+        console.log("Fecha: "+fecha)
+        var ejercicios=examen[num-1].getElementsByTagName("ejercicio");
+        console.log()
+            console.log(ejercicios[0])
+          var nombreEjercicio=ejercicios[0].getAttribute("nombre");
+          var ins=ejercicios[numeritoEjercicio].getElementsByTagName("indicaciones")[0].textContent;
+          var opcion1=ejercicios[numeritoEjercicio].getElementsByTagName("opcion")[0].textContent;
+          var opcion2=ejercicios[numeritoEjercicio].getElementsByTagName("opcion")[1].textContent;
+          var opcion3=ejercicios[numeritoEjercicio].getElementsByTagName("opcion")[2].textContent;
+          var opcion4=ejercicios[numeritoEjercicio].getElementsByTagName("opcion")[3].textContent;
+          var resultado=ejercicios[numeritoEjercicio].getElementsByTagName("resultado")[0].textContent;
+        
+          respuestasCorrectas+=resultado;
+          infoExamen+="<p class='lead fondo-superman text-link'>Nombre del examen: "+nombre+"</p>";
+          infoExamen+="<p class='lead fondo-superman text-light'>Fecha de creación del examen: "+fecha+"</p>";
+          infoExamen+="<div class='contenido-mediano card'>";
+          infoExamen+="<div class='header-card bg-light'>"
+          infoExamen+="<p class='lead'>Nombre del ejercicio: "+nombreEjercicio+"</p>";
+          infoExamen+="<hr>";
+          infoExamen+="<p class='lead'>Instrucciones: "+ins+"</p>";
+          infoExamen+="</div>";
+          infoExamen+="<div class='body-card'>";
+          infoExamen+="<div class='wrapper'>";
+          infoExamen+="<div class='box' id='primero'>"
+          infoExamen+="<div id='opcion1' class='task' draggable='true'>";
+          infoExamen+=""+opcion1+"";
+          infoExamen+="</div>";
+          infoExamen+="<div id='opcion2' class='task' draggable='true'>";
+          infoExamen+=""+opcion2+"";
+          infoExamen+="</div>";
+          infoExamen+="<div id='opcion3' class='task' draggable='true'>";
+          infoExamen+=""+opcion3+"";
+          infoExamen+="</div>"
+          infoExamen+="<div id='opcion4' class='task' draggable='true'>"
+          infoExamen+=""+opcion4+"";
+          infoExamen+="</div>";
+          infoExamen+="</div>";
+          infoExamen+="<div class='box' id='segundo'></div>";
+          infoExamen+="</div>";
+          infoExamen+="</div>";
+          infoExamen+="<div class='footer-card bg-success'>";
+          infoExamen+="<p class='font-weight-bold lead'>Ordena de arriba hacia abajo</p>";
+          infoExamen+="</div>"
+          infoExamen+="</div>"
+          infoExamen+="<button class='btn btn-outline-danger form-control' onclick='obtieneRespuestas()'>Evaluar</button>"
+          document.getElementById("cuerpo").innerHTML=infoExamen;
+          creaEventos();
+      }
+      
+      function obtieneRespuestas(){
+          var segundo=document.getElementById("segundo").getElementsByTagName("div");
+          console.log("Datos Recuperados: ");
+          var ayuda;
+          var respuestasObtenidas='';
+          for(let i=0;i<segundo.length;i++){
+              ayuda=segundo[i].id;
+              if(i===0)
+                respuestasObtenidas+=ayuda.substring(6);
+              else{
+                  respuestasObtenidas+=',';
+                  respuestasObtenidas+=ayuda.substring(6);
+              }
+              
+          }
+          console.log(respuestasObtenidas);
+          console.log(respuestasCorrectas);
+          if(respuestasObtenidas===respuestasCorrectas){
+              alert("Respondido correctamente");
+          }else{
+              alert("Respondido incorrectamente");
+          }
+          respuestasCorrectas='';
+          respuestasObtenidas='';
+          numeritoEjercicio++;
+      }
+
+    </script>
+  <script type="text/javascript" src="js_react/exPrueba.js"></script></body>
+</html>

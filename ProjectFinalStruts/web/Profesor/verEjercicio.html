@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../src/css/index.css" />
+  <script src="https://unpkg.com/react/umd/react.production.js" crossorigin />
+  <script src="https://unpkg.com/react-dom/umd/react-dom.production.js" crossorigin/>
+    <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin/>
+    <script>var Alert = ReactBootstrap.Alert;</script>
+  <title>Numeros de decimales en Administrador</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+</head>
+
+<body class="fondo-azulado">
+  <noscript>Necesitas habilitar JavaScript para ejecutar la aplicación.</noscript>
+  <div id="welcome"></div>
+  <hr>
+  <div id="navegaProfe"></div>
+  <br>
+
+  <nav aria-label="breadcrumb" class="contenido-chico">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="btn btn-primary" href="creaEjercicio.html">Crear un ejercicio nuevo</a></li>
+        <li class="breadcrumb-item" aria-current="page"><button id="muestraEjercicio" class="btn btn-success">Muestra ejercicios</button></li>
+      </ol>
+  </nav>
+  <br><br><br>
+
+  <div id="text">
+    <table id="demo" class="table table-hover table-dark">
+    </table>
+  </div>
+
+  <script>
+    document.getElementById("muestraEjercicio").addEventListener("click", cargarTabla);
+    function cargarTabla() {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        cargarXML(this);
+      };
+      xhr.open("GET", "../xml/ejercicios.xml", true);
+      xhr.send();
+    }
+
+    function cargarXML(xml) {
+      var docXML = xml.responseXML;
+      console.log(docXML)
+      var tabla = "<tr><th scope='col'>#</th><th scope='col'>Nombre del ejercicio</th><th scope='col'>Accionnes</th></tr>"
+      var ejercicio = docXML.getElementsByTagName("ejercicio");
+      console.log(ejercicio)
+      for (var i = 0; i < ejercicio.length; i++) {
+        tabla += "<tr><th socpe='row'>";
+        tabla += (i + 1);
+        tabla += "</th><td>";
+        tabla += ejercicio[i].getAttribute("nombre");
+        tabla += "</td>";
+        tabla += "<td><a class='btn btn-primary' href='infoEjercicio.html?numero="+(i+1)+"'>Ver ejercicio</a>";
+        tabla += "<a class='btn btn-warning' href='modificaEjercicio.html?numero="+(i+1)+"' >Modificar</a>";
+        tabla += "<button type='button' class='btn btn-danger' onclick='eliminaClick("+(i+1)+")'>Eliminar</button>";
+        tabla += "</td></tr>"
+      }
+      document.getElementById("demo").innerHTML = tabla;
+    }
+
+    function eliminaClick(numero){
+      var opcion = confirm("Desea eliminar el ejercicio: "+numero);
+      console.log(opcion);
+      if(opcion==true){
+        let url = 'http://localhost:8080/ProjectFinalStruts/BorraEjercicio?numero='+numero;
+        alert('URL:' + url);
+        fetch(url).then(response => response.text()).then(data => {
+            alert(data);    
+            cargarTabla()
+        });
+      }
+        
+    }
+  </script>
+
+  <div id="alerta">
+
+  </div>
+<script type="text/javascript" src="js_react/verEj.js"></script></body>
+
+</html>
