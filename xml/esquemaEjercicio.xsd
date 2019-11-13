@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ejercicios" type="datos"/>
+	<xs:complexType name="datos">
+		<xs:sequence>
+			<xs:element name="ejercicio" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="indicaciones" type="xs:string"/>
+						<xs:element name="opcion1" type="xs:string"/>
+						<xs:element name="opcion2" type="xs:string"/>
+						<xs:element name="opcion3" type="xs:string"/>
+						<xs:element name="opcion4" type="xs:string"/>
+						<xs:element name="resultado" type="xs:string"/>
+					</xs:sequence>
+					<xs:attribute name="numero" type="xs:integer" use="required"/>
+					<xs:attribute name="tipo" type="xs:string" use="required"/>
+					<xs:attribute name="nombre" type="xs:string" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

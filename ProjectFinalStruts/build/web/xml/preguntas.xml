@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preguntas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Users/gerpo/OneDrive/Escritorio/xml/esquemaPregunta.xsd">
+    <pregunta numero="1" tipo="V-F">
+	<cuestionamiento>¿Es verdadero o falso que 1.5 + 1.2= 2.9?</cuestionamiento>
+	<respuesta>Verdadero</respuesta>
+    </pregunta>
+    <pregunta numero="2" tipo="Operacion">
+        <cuestionamiento>¿Cuánto es 3.009 + 1.05?</cuestionamiento>
+        <respuesta>4.059</respuesta>
+    </pregunta>
+    <pregunta numero="3" tipo="Operacion">
+        <cuestionamiento>¿Cuánto es 4.009 + 1.06?</cuestionamiento>
+        <respuesta>4.059</respuesta>
+    </pregunta>
+</preguntas>

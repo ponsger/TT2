@@ -11,6 +11,7 @@ import static Complementos.Operaciones.*;
 import entitys.Profesor;
 import java.util.Iterator;
 import org.hibernate.Query;
+import org.apache.struts2.ServletActionContext;
 
 /**
  *
@@ -23,28 +24,37 @@ public class BuscarTodosLosProfesores {
         hibernateSession = HibernateUtil.getSessionFactory().openSession(); 
         Transaction t = hibernateSession.beginTransaction();
         
+        JSONObject raiz = new JSONObject();
         JSONObject obj = new JSONObject();
         
         String hql = "FROM Profesor";
         Query query = hibernateSession.createQuery(hql);
         Iterator results = query.iterate();        
-        
+        int contador=0;
         while(results.hasNext()){
             Profesor profesor = (Profesor)results.next();
             Usuario usuario = (Usuario)hibernateSession.load(Usuario.class, profesor.getIdUsuario());
             
             JSONObject innerObj = new JSONObject();
-            innerObj.put("nombre", usuario.getNombres());
-            
-            obj.put(profesor.getIdUsuario(),innerObj);
+            innerObj.put("nombre", usuario.getNombre());
+            innerObj.put("id", profesor.getIdUsuario());
+            innerObj.put("apMat", usuario.getApMat());
+            innerObj.put("apPat", usuario.getApPaterno());
+            innerObj.put("username", usuario.getNombreUsuario());
+            obj.put(contador,innerObj);
+            raiz.put("idProfesores", obj);
+            contador++;
         }
         
-        try{
-            FileWriter file = new FileWriter("C:\\jars\\json\\resultadoConsulta.json");
-            file.write(obj.toJSONString());
+        try{           
+            String hola=ServletActionContext.getServletContext().getRealPath("/json");
+            System.out.println("***************************************************************");
+            System.out.println(hola);
+            FileWriter file = new FileWriter(ServletActionContext.getServletContext().getRealPath("json/resultadoConsultaProfesores.json"));
+            file.write(raiz.toJSONString());
             file.flush();
             file.close();
-        
+            System.out.println("Exitoso");
         } catch (IOException e) {
             e.printStackTrace();
         }

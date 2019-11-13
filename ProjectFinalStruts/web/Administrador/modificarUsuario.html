@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="../src/css/index.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <script src="https://unpkg.com/react/umd/react.production.js" crossorigin />
-    <script src="https://unpkg.com/react-dom/umd/react-dom.production.js" crossorigin/>
-    <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin/>
+    <script type="text/plain" src="https://unpkg.com/react/umd/react.production.js" crossorigin />
+    <script type="text/plain" src="https://unpkg.com/react-dom/umd/react-dom.production.js" crossorigin/>
+    <script type="text/plain" src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin/>
     <script>var Alert = ReactBootstrap.Alert;</script>
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -22,10 +22,43 @@
     <div id="welcome"></div>
     <div id="navega"></div>
     <br>
-    <div id="opciones"></div>
+  <center>
+     <div class="container-fluid">
+                <nav class="breadcrumb bg-secondary justify-content-center">
+                <ol class="breadcrumb bg-light">
+                    <li class="breadcrumb-item"><button class="btn btn-primary" aria-current="page" onclick="buscarUsuario()">Modificar usuario</button></li>
+                    <li class="breadcrumb-item"><button class="btn btn-primary" aria-current="page" onclick="buscarGrupo()">Modificar grupo</button></li>
+                </ol>
+            </nav>
+            </div>
+  </center>
+  <center>
     <div id="modificaUsuario"></div>
     <div id="profesor"></div>
     <div id="alumno"></div>
     <div id="grupo"></div>
-  <script type="text/javascript" src="main.js"></script></body>
+    
+    <br>
+    <br>
+    <div class="container container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <button class="btn btn-dark" onclick="muestraUsuarios()">Mostrar usuarios</button>
+            </div>
+            <div class="col-6">
+                <button class="btn btn-light" onclick="muestraGrupos()">Mostrar grupos</button>
+            </div>
+        </div>
+    </div>
+  </center>
+  
+    <div id="tabla1"></div>
+  <div id="tabla2"></div>
+  <div id="tabla3"></div>
+  <div id="tabla4"></div>
+    <script type="text/javascript" src="js/buscarUsuario.js"></script>
+    <script type="text/javascript" src="js/buscarGrupo.js"></script>
+    <script type="text/javascript" src="js/muestraUsuarios.js"></script>
+    <script type="text/javascript" src="js/muestraGrupos.js"></script>
+  <script type="text/javascript" src="js_react/modificarUsuario.js"></script></body>
 </html>

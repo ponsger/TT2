@@ -1,13 +1,35 @@
 package Actions;
 
 import com.opensymphony.xwork2.ActionSupport;
+import entitys.HibernateUtil;
+import entitys.Profesor;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import xml.Ejercicio;
 import xml.XMLActions;
 
 public class AgregaEjercicio extends ActionSupport {
-    private String inst,op1,op2,op3,op4,res;
+    private String inst,op1,op2,op3,op4,res,nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    private int idProfesor;
+
+    public int getIdProfesor() {
+        return idProfesor;
+    }
+
+    public void setIdProfesor(int idProfesor) {
+        this.idProfesor = idProfesor;
+    }
+    
 
     public String getInst() {
         return inst;
@@ -62,9 +84,15 @@ public class AgregaEjercicio extends ActionSupport {
     
     @Override
     public String execute(){ 
+        Session hibernateSession;
+        hibernateSession = HibernateUtil.getSessionFactory().openSession(); 
+        Transaction t = hibernateSession.beginTransaction();
+        
         System.out.println("***************************************Invocado y todo correcto :)"); // jajajaja te mamas
+        
         Ejercicio nuevo=new Ejercicio();
         XMLActions xml=new XMLActions();
+        
         nuevo.setOpcion1(op1);
         nuevo.setOpcion2(op2);
         nuevo.setOpcion3(op3);
@@ -74,14 +102,18 @@ public class AgregaEjercicio extends ActionSupport {
         nuevo.setNumero("100");
         nuevo.setNombre("Prueba");
         nuevo.setTipo("default");
-        List listas=xml.cargarXml();
+        
+        Profesor profesor = (Profesor)hibernateSession.load(Profesor.class, this.idProfesor);
+        String ruta = profesor.getRutaXmlejercicios();
+        
+        List listas = xml.cargarXml(ruta);
         System.out.println("Hay "+listas.size()+"elementos en la lista");
         ArrayList<Ejercicio> datos=xml.convierte2ArrayList(listas);
         System.out.println("Hay "+datos.size()+"elementos en el array list");
         datos.add(nuevo);
         
         System.out.println("se agrego un elemento al arraylist y ahora hay "+datos.size());
-        if(xml.guardarXml(datos)==true){
+        if(xml.guardarXml(datos, ruta)==true){
             System.out.println("*****************************************");
             System.out.println("Archivo xml guardado ultimo");
             return SUCCESS;

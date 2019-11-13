@@ -5,6 +5,15 @@ import java.io.Serializable;
 
 public class Ejercicio implements Serializable{
     private String nombre,tipo,pregunta,resultado,numero,opcion1,opcion2,opcion3,opcion4;
+    private int copiaEjercicio;
+
+    public int getCopiaEjercicio() {
+        return copiaEjercicio;
+    }
+
+    public void setCopiaEjercicio(int copiaEjercicio) {
+        this.copiaEjercicio = copiaEjercicio;
+    }
 
     public Ejercicio(){   
     }

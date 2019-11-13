@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ejercicios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Users/Irma%20Pons/Documents/xml/datos%20bien/esquemaEjercicio.xsd">
-  <ejercicio numero="1" tipo="Ordena" nombre="Ordena los números decimales">
+<ejercicios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Users/gerpo/OneDrive/Escritorio/xml/esquemaEjercicio.xsd">
+<ejercicio numero="1" tipo="Ordena" nombre="Ordena los números decimales">
     <indicaciones>Ordena los numeros de mayor a menor de arriba hacia abajo</indicaciones>
-    <opcion>0.69</opcion>
-    <opcion>0.65</opcion>
-    <opcion>0.32</opcion>
-    <opcion>0.66</opcion>
+    <opcion1>0.69</opcion1>
+    <opcion2>0.65</opcion2>
+    <opcion3>0.32</opcion3>
+    <opcion4>0.66</opcion4>
     <resultado>1,4,2,3</resultado>
   </ejercicio>
   
   <ejercicio numero="2" tipo="Ordena" nombre="Ordena números enteros con decimales">
     <indicaciones>Pinta de cualquier color el numero mas grande</indicaciones>
-    <opcion>2.54</opcion>
-    <opcion>3.45</opcion>
-    <opcion>5.32</opcion>
-    <opcion>1.01</opcion>
+    <opcion1>2.54</opcion1>
+    <opcion2>3.45</opcion2>
+    <opcion3>5.32</opcion3>
+    <opcion4>1.01</opcion4>
     <resultado>3,2,1,4</resultado>
   </ejercicio>
   
   <ejercicio numero="3" tipo="Ordena" nombre="Acomoda las fracciones de mayor a menor">
     <indicaciones>Acomoda de menor a mayor</indicaciones>
-    <opcion>1/100</opcion>
-    <opcion>1/10</opcion>
-    <opcion>1/50</opcion>
-    <opcion>1/1</opcion>
+    <opcion1>1/100</opcion1>
+    <opcion2>1/10</opcion2>
+    <opcion3>1/50</opcion3>
+    <opcion4>1/1</opcion4>
     <resultado>4,2,3,1</resultado>
   </ejercicio>
-  
-</ejercicios>
-
-
+  </ejercicios>

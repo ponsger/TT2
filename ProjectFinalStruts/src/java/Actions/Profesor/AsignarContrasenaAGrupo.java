@@ -2,10 +2,12 @@ package Actions.Profesor;
 
 import java.io.Serializable;
 import static Complementos.Operaciones.*;
+import Complementos.cifrarContrasenas;
 import entitys.Alumno;
 import entitys.Grupo;
 import entitys.HibernateUtil;
 import entitys.Usuario;
+import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -35,10 +37,11 @@ public class AsignarContrasenaAGrupo implements Serializable{
         this.nuevaContrasena = nuevaContrasena;
     }
     
-    public String execute(){
+    public String execute() throws UnsupportedEncodingException{
         Session session;
         session = HibernateUtil.getSessionFactory().openSession(); 
         Transaction t = session.beginTransaction();
+        cifrarContrasenas c = new cifrarContrasenas();
         
         Grupo grupo = (Grupo)session.load(Grupo.class, this.idGrupo);
         
@@ -50,7 +53,7 @@ public class AsignarContrasenaAGrupo implements Serializable{
             Alumno alumno = (Alumno)resultados.next();
             int id = alumno.getIdUsuario();
             Usuario usuario = (Usuario)session.load(Usuario.class, id);
-            usuario.setContrasena(nuevaContrasena);
+            usuario.setContrasena(c.encriptar(this.nuevaContrasena));
             session.update(usuario);
             t.commit();
         }

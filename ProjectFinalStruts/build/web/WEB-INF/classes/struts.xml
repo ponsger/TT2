@@ -66,37 +66,49 @@
         
         <action name="AgregarUsuario" class="Actions.Administrador.AgregarUsuario">             <!-- Agrega usuario -->
             <result name="success" type="redirect">
-                <param name="location">Administrador/Administrador.html?correcto=done</param>
+                <param name="location">Administrador/respuestas/agregarUsuario.jsp?correcto=done</param>
             </result>
         </action>
         
         <action name="EliminarUsuario" class="Actions.Administrador.EliminarUsuario">             <!-- Eliminar usuario -->
             <result name="success" type="redirect">
-                <param name="location">Administrador/Administrador.html?correcto=done</param>
+                <param name="location">Administrador/respuestas/eliminarUsuario.jsp?correcto=done</param>
             </result>
         </action>
         
         <action name="AgregarGrupo" class="Actions.Administrador.AgregarGrupo">             <!-- AgregarGrupo -->
             <result name="success" type="redirect">
-                <param name="location">Administrador/Administrador.html?correcto=done</param>
+                <param name="location">Administrador/respuestas/agregarUsuario.jsp?correcto=done</param>
+            </result>
+        </action>
+        
+        <action name="AgregarProfesorAGrupo" class="Actions.Administrador.AgregarProfesorAGrupo">             <!-- Agregar profesor a grupo -->
+            <result name="success" type="redirect">
+                <param name="location">Administrador/respuestas/agregarUsuario.jsp?correcto=done</param>
+            </result>
+        </action>
+        
+        <action name="AgregarAlumnoAGrupo" class="Actions.Administrador.AgregarAlumnoAGrupo">             <!-- Agregar alumno a grupo -->
+            <result name="success" type="redirect">
+                <param name="location">Administrador/respuestas/agregarUsuario.jsp?correcto=done</param>
             </result>
         </action>
         
         <action name="EliminarGrupo" class="Actions.Administrador.EliminarGrupo">             <!-- EliminarGrupo -->
             <result name="success" type="redirect">
-                <param name="location">Administrador/Administrador.html?correcto=done</param>
+                <param name="location">Administrador/respuestas/eliminarUsuario.jsp?correcto=done</param>
             </result>
         </action>
         
         <action name="ModificarUsuario" class="Actions.Administrador.ModificarUsuario">             <!-- ModificarUsuario -->
             <result name="success" type="redirect">
-                <param name="location">Administrador/Administrador.html?correcto=done</param>
+                <param name="location">Administrador/respuestas/modificarCorrectamente.jsp?correcto=done</param>
             </result>
         </action>
         
         <action name="ModificarGrupo" class="Actions.Administrador.ModificarGrupo">             <!-- ModificarGrupo -->
             <result name="success" type="redirect">
-                <param name="location">Administrador/Administrador.html?correcto=done</param>
+                <param name="location">Administrador/respuestas/modificarCorrectamente.jsp?correcto=done</param>
             </result>
         </action>
         
@@ -108,50 +120,203 @@
         
         <action name="Logout" class="Actions.Logout">    <!-- Logout -->
             <result name="logout" type="redirect">
-                <param name="location">index.html</param>
+                <param name="location">cerrarSesion.jsp?correcto=done</param>
             </result>         
         </action>
         
         <action name="BuscarUnGrupo" class="Consultas.BuscarUnGrupo">    <!-- Buscar un grupo -->
-            <result name="SUCCESS" type="redirect">
-                <param name="location">index.html</param>
+            <result name="success" type="redirect">
+                <param name="location">Administrador/respuestas/datosCargados.jsp?correcto=done</param>
             </result>         
         </action>
         
         <action name="BuscarUnUsuario" class="Consultas.BuscarUnUsuario">    <!-- Buscar un usuario -->
-            <result name="SUCCESS" type="redirect">
-                <param name="location">index.html</param>
+            <result name="success" type="redirect">
+                <param name="location">Administrador/respuestas/datosCargados.jsp?correcto=done</param>
             </result>         
         </action>
         
         <action name="BuscarTodosLosGrupos" class="Consultas.BuscarTodosLosGrupos">    <!-- Buscar Todos Los Grupos -->
-            <result name="SUCCESS" type="redirect">
-                <param name="location">index.html</param>
+            <result name="success" type="redirect">
+                <param name="location">Administrador/respuestas/datosCargados.jsp?correcto=done</param>
             </result>         
         </action>
         
         <action name="BuscarTodosLosUsuarios" class="Consultas.BuscarTodosLosUsuarios">    <!-- Buscar Todos Los usuarios -->
-            <result name="SUCCESS" type="redirect">
-                <param name="location">index.html</param>
+            <result name="success" type="redirect">
+                <param name="location">Administrador/respuestas/datosCargados.jsp?correcto=done</param>
             </result>         
         </action>
         
         <action name="BuscarAlumnosSinGrupo" class="Consultas.BuscarAlumnosSinGrupo">    <!-- Buscar alumno sin grupo -->
-            <result name="SUCCESS" type="redirect">
-                <param name="location">index.html</param>
+            <result name="success" type="redirect">
+                <param name="location">Administrador/respuestas/datosCargados.jsp?correcto=done</param>
             </result>         
         </action>
         
         <action name="BuscarTodosLosProfesores" class="Consultas.BuscarTodosLosProfesores">    <!-- Buscar Todos Los profesores -->
-            <result name="SUCCESS" type="redirect">
-                <param name="location">index.html</param>
+            <result name="success" type="redirect">
+                <param name="location">Administrador/respuestas/datosCargados.jsp?correcto=done</param>
             </result>         
         </action>
         
         <action name="BuscarGruposSinProfesor" class="Consultas.BuscarGruposSinProfesor">    <!-- Buscar Grupos Sin Profesor -->
-            <result name="SUCCESS" type="redirect">
-                <param name="location">index.html</param>
+            <result name="success" type="redirect">
+                <param name="location">Administrador/respuestas/datosCargados.jsp?correcto=done</param>
             </result>         
+        </action>
+        
+        <action name="AgregarPregunta" class="Actions.Profesor.AgregarPregunta">             <!-- Agregar pregunta -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="EliminarPregunta" class="Actions.Profesor.EliminarPregunta">             <!-- Eliminar pregunta -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="ModificarPregunta" class="Actions.Profesor.ModificarPregunta">             <!-- Modificar pregunta -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="RegistrarRespuestaPregunta" class="Actions.Alumno.RegistrarRespuestaPregunta">  <!-- Registrar respuesta pregunta -->
+            <result name="success" type="redirect">
+                <param name="location">Alumno/Alumno.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Alumno/Alumno.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="RegistrarRespuestaEjercicio" class="Actions.Alumno.RegistrarRespuestaEjercicios">  <!-- Registrar respuesta ejercicio -->
+            <result name="success" type="redirect">
+                <param name="location">Alumno/Alumno.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Alumno/Alumno.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="AsignarEjercicioAGrupo" class="Actions.Profesor.AsignarEjercicioAGrupo">             <!-- Asignar Ejercicio A Grupo -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="AsignarExamenAGrupo" class="Actions.Profesor.AsignarExamenAGrupo">             <!-- Asignar Examen A Grupo -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="AsignarPreguntaAGrupo" class="Actions.Profesor.AsignarPreguntaAGrupo">             <!-- Asignar Pregunta A Grupo -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="AsignarExamenAAlumnos" class="Actions.Profesor.AsignarExamenAAlumnos">             <!-- Asignar Examen A Alumnos -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="AsignarEjercicioAAlumnos" class="Actions.Profesor.AsignarEjercicioAAlumnos">             <!-- Asignar Ejercicio A Alumnos -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="AsignarPreguntaAAlumnos" class="Actions.Profesor.AsignarPreguntaAAlumnos">             <!-- Asignar Pregunta A Alumnos -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="CrearCopiaPregunta" class="Actions.Profesor.CrearCopiaPregunta">             <!-- CrearCopiaPregunta -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="CrearCopiaEjercicio" class="Actions.Profesor.CrearCopiaEjercicio">             <!-- CrearCopiaEjercicio -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="AgregarEjerciciosAExamen" class="Actions.Profesor.AgregarEjerciciosAExamen">    <!-- AgregarEjerciciosAExamen -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="derror">
+                <param name="location">Profesor/respuestas/agregarEjercicios2Examen.jsp?correcto=true</param>
+            </result>
+        </action>
+        
+        <action name="AgregarPreguntasAExamen" class="Actions.Profesor.AgregarPreguntasAExamen">    <!-- AgregarPreguntasAExamen -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/respuestas/agregarPreguntas2Examen.jsp?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/respuestas/error.jsp?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="AgregarEjercicio" class="Actions.Profesor.AgregarEjercicio">    <!-- AgregarEjercicio -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
+        </action>
+        
+        <action name="EliminarEjercicio" class="Actions.Profesor.EliminarEjercicio">    <!-- EliminarEjercicio -->
+            <result name="success" type="redirect">
+                <param name="location">Profesor/Profesor.html?correcto=true</param>
+            </result>
+            <result name="error">
+                <param name="location">Profesor/Profesor.html?correcto=false</param>
+            </result>
         </action>
     </package>
 </struts>

@@ -22,10 +22,39 @@
         <div id="welcome"></div>
         <hr>  
         <br>
-        <a class="btn btn-link" href="verEjercicio.html">Regresar para ver los ejercicios</a>
-        <div id="formulario">
+        <button class="btn btn-link" onclick="redireccionaVerEjercicio()">Regresar para ver los ejercicios</button>
+        
+    <center>
+        <h2 class="bg-secondary text-white">Selecciona el tipo de ejercicio que deseas crear</h2>
+        <select id="opcion" class="container custom-select" onchange="creaEjercicio()">
+            <option value="---" >---</option>
+            <option value="DAD">Arrastrar y soltar</option>
+            <option value="Linea">Une con lineas</option>
+            <!-- Aqui van las opciones de los ejercicios -->
+        </select>
+    </center>
+        <!--<div id="formulario">
+        </div> -->
+        <br><br>
+        <div id="tipo">
             
         </div>
+        
+        <script type="text/javascript" src="js/creaEjercicio.js"></script>
+        
+        <script>
+            function redireccionaVerEjercicio(){
+                var id=getParameterByName("id");
+                window.location.href='http://localhost:8080/ProjectFinalStruts/Profesor/verEjercicio.html?id='+id;
+            } 
+            
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+          </script>
         <script type="text/javascript" src="js_react/creaEj.js"></script></body>
 
 </html>

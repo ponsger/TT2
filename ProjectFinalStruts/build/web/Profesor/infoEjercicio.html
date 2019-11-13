@@ -15,13 +15,13 @@
   <noscript>Necesitas habilitar JavaScript para ejecutar la aplicación.</noscript>
   <div id="welcome"></div>
   <div class="card align-items-center chico">
-    <a class="btn btn-light" href="verEjercicio.html">Mostrar Ejercicios</a>
-    <a class="btn btn-light" href="creaEjercicio.html">Crear ejercicio</a>
-    <a class="btn btn-light" href="agregaExamen.html">Crear examen</a>
+    <button class="btn btn-light" onclick="redireccionaVerEjercicio()">Mostrar Ejercicios</button>
+    <button class="btn btn-light" onclick="redireccionaCreaEjercicio()" >Crear ejercicio</button>
+    <button class="btn btn-light" onclick="redireccionaAgregaExamen()" >Crear examen</button>
   </div>
   <center><button id="muestraEjercicio" class="btn btn-success">Cargar Datos del ejercicio</button></center>
   <br>
-  <div class="card">
+  <div class="card container">
     <div class="card-header">
       <p class="h3">Información del ejercicio</p>
     </div>
@@ -32,6 +32,23 @@
     <script type="text/javascript">
       document.getElementById("muestraEjercicio").addEventListener("click", cargaDatos);
       var num;
+      
+      function redireccionaVerEjercicio(){
+          var id=getParameterByName("id");
+        window.location.href='http://localhost:8080/ProjectFinalStruts/Profesor/verEjercicio.html?id='+id;
+      }
+      
+      function redireccionaCreaEjercicio(){
+          var id=getParameterByName("id");
+        window.location.href='http://localhost:8080/ProjectFinalStruts/Profesor/creaEjercicio.html?id='+id;
+      }
+      
+      function redireccionaAgregaExamen(){
+          var id=getParameterByName("id");
+        window.location.href='http://localhost:8080/ProjectFinalStruts/Profesor/agregaExamen.html?id='+id;
+      }
+      
+      
       function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -63,14 +80,13 @@
         console.log(ejercicio)
         console.log(ejercicio[num-1])
         var nombre=ejercicio[num-1].getAttribute("nombre");
+        var tipo=ejercicio[num-1].getAttribute("tipo")
         var ins=ejercicio[num-1].getElementsByTagName("indicaciones")[0].textContent;
-        var opciones=ejercicio[num-1].getElementsByTagName("opcion")[0].textContent;
-        var opcion1=ejercicio[num-1].getElementsByTagName("opcion")[0].textContent;
-        var opcion2=ejercicio[num-1].getElementsByTagName("opcion")[1].textContent;
-        var opcion3=ejercicio[num-1].getElementsByTagName("opcion")[2].textContent;
-        var opcion4=ejercicio[num-1].getElementsByTagName("opcion")[3].textContent;
+        var opcion1=ejercicio[num-1].getElementsByTagName("opcion1")[0].textContent;
+        var opcion2=ejercicio[num-1].getElementsByTagName("opcion2")[0].textContent;
+        var opcion3=ejercicio[num-1].getElementsByTagName("opcion3")[0].textContent;
+        var opcion4=ejercicio[num-1].getElementsByTagName("opcion4")[0].textContent;
         var resultado=ejercicio[num-1].getElementsByTagName("resultado")[0].textContent;
-        console.log("Opciones "+ opciones)
         console.log(opcion1)
         console.log(opcion2)
         console.log(opcion3)
@@ -79,6 +95,7 @@
             infoEjercicio +="<div class='card-columns'>";
             infoEjercicio+="<label class='lead'>Nombre del ejercicio: </label><input type='text' class='form-control' value='"+nombre+"' readOnly/><br></div>";
             infoEjercicio+="<div class='card-columns'><label class='lead'> Instrucciones: </label><input type='text' class='form-control' value='"+ins+"' readOnly/><br></div>";
+            infoEjercicio+="<div class='card-columns'><label class='lead'> Tipo de ejercicio</label><input type='text' class='form-control' value='"+tipo+"' readOnly/> <br></div>"
             infoEjercicio+="<hr><div class='card-columns'><label class='lead'>Opcion 1: </label><input type='text' class='form-control' value='"+opcion1+"' readOnly/><br></div>";
             infoEjercicio+="<div class='card-columns'><label class='lead'>Opcion 2: </label><input type='text' class='form-control' value='"+opcion2+"' readOnly/><br></div>";
             infoEjercicio+="<div class='card-columns'><label class='lead'>Opcion 3: </label><input type='text' class='form-control' value='"+opcion3+"' readOnly/><br></div>";

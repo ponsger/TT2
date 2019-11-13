@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ejercicios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Users/Irma%20Pons/Documents/xml/datos%20bien/esquemaEjercicio.xsd">
-  <ejercicio numero="1" tipo="Ordena" nombre="Ordena por mayor">
-    <indicaciones>Ordena los numeros de mayor a menor</indicaciones>
-    <opcion numero="1">0.65</opcion>
-    <opcion numero="2">0.66</opcion>
-    <opcion numero="3">0.32</opcion>
-    <opcion numero="4">0.69</opcion>
-    <resultado>2,1,4,3</resultado>
+<ejercicios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Users/gerpo/OneDrive/Escritorio/xml/esquemaEjercicio.xsd">
+<ejercicio numero="1" tipo="DAD" nombre="Ordena los números decimales">
+    <indicaciones>Ordena los numeros de mayor a menor de arriba hacia abajo</indicaciones>
+    <opcion1>0.69</opcion1>
+    <opcion2>0.65</opcion2>
+    <opcion3>0.32</opcion3>
+    <opcion4>0.66</opcion4>
+    <resultado>1,4,2,3</resultado>
   </ejercicio>
   
-  <ejercicio numero="2" tipo="Pinta" nombre="Pinta el mas grande">
+  <ejercicio numero="2" tipo="DAD" nombre="Ordena números enteros con decimales">
     <indicaciones>Pinta de cualquier color el numero mas grande</indicaciones>
-    <opcion numero="1">2.54</opcion>
-    <opcion numero="2">3.45</opcion>
-    <opcion numero="3">5.32</opcion>
-    <opcion numero="4">1.01</opcion>
-    <resultado>3</resultado>
+    <opcion1>2.54</opcion1>
+    <opcion2>3.45</opcion2>
+    <opcion3>5.32</opcion3>
+    <opcion4>1.01</opcion4>
+    <resultado>3,2,1,4</resultado>
   </ejercicio>
   
-  <ejercicio numero="3" tipo="Dad" nombre="Fracciones iguales a datos">
-      <indicaciones>Acomoda de menor a mayor</indicaciones>
-    <opcion numero="1">2.54</opcion>
-    <opcion numero="2">3.45</opcion>
-    <opcion numero="3">5.32</opcion>
-    <opcion numero="4">1.01</opcion>
-    <resultado>4,1,2,3</resultado>
-    <fraccion letra="A">1/10</fraccion>
-    <fraccion letra="B">5/9</fraccion>
-    <fraccion letra="C">7/21</fraccion>
-    <fraccion letra="D">8/4</fraccion>
+  <ejercicio numero="3" tipo="Linea" nombre="Une los numeros que son similares">
+    <indicaciones>Acomoda de menor a mayor</indicaciones>
+    <opcion1>1/100</opcion1>
+    <opcion2>1/10</opcion2>
+    <opcion3>1/50</opcion3>
+    <opcion4>1/1</opcion4>
+    <resultado>4,2,3,1</resultado>
   </ejercicio>
-  
-</ejercicios>
-
-
+  </ejercicios>

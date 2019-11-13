@@ -2,8 +2,12 @@
 package Actions;
 
 import com.opensymphony.xwork2.ActionSupport;
+import entitys.HibernateUtil;
+import entitys.Profesor;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import xml.Ejercicio;
 import xml.XMLActions;
 
@@ -13,7 +17,17 @@ import xml.XMLActions;
  */
 public class ModificaEjercicio extends ActionSupport {
     
-    String numero,nombre,instrucciones,opcion1,opcion2,opcion3,opcion4,resultado;   
+    String numero,nombre,instrucciones,opcion1,opcion2,opcion3,opcion4,resultado; 
+    private int idProfesor;
+
+    public int getIdProfesor() {
+        return idProfesor;
+    }
+
+    public void setIdProfesor(int idProfesor) {
+        this.idProfesor = idProfesor;
+    }
+    
     
     public ModificaEjercicio() {
     }
@@ -84,9 +98,16 @@ public class ModificaEjercicio extends ActionSupport {
     
     @Override
     public String execute(){
+        Session hibernateSession;
+        hibernateSession = HibernateUtil.getSessionFactory().openSession(); 
+        Transaction t = hibernateSession.beginTransaction();
+        
+        Profesor profesor = (Profesor)hibernateSession.load(Profesor.class, this.idProfesor);
+        String ruta = profesor.getRutaXmlejercicios();
+        
         Ejercicio ejercicioModificado=new Ejercicio();
         XMLActions xml=new XMLActions();
-        List lista=xml.cargarXml();
+        List lista=xml.cargarXml(ruta);
         ArrayList<Ejercicio> ejercicios=xml.convierte2ArrayList(lista);
         ejercicioModificado.setNombre(nombre);
         ejercicioModificado.setNumero("100");
@@ -98,7 +119,7 @@ public class ModificaEjercicio extends ActionSupport {
         ejercicioModificado.setOpcion4(opcion4);
         ejercicioModificado.setTipo("default");
         ejercicios=xml.modificaEjercicio(ejercicios,numero,ejercicioModificado);
-        if(xml.guardarXml(ejercicios)==true){
+        if(xml.guardarXml(ejercicios, ruta)==true){
             return SUCCESS;
         }else{
             return ERROR;

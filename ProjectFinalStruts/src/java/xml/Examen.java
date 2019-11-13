@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Examen implements Serializable{
     String nombre,fecha;
     ArrayList<Ejercicio> ejercicios;
-    //ArrayList<Pregunta> preguntas;
+    ArrayList<Pregunta> preguntas;
     public Examen(){
     }
 
@@ -16,6 +16,14 @@ public class Examen implements Serializable{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public ArrayList<Pregunta> getPreguntas() {
+        return preguntas;
+    }
+
+    public void setPreguntas(ArrayList<Pregunta> preguntas) {
+        this.preguntas = preguntas;
     }
 
     public String getFecha() {

@@ -9,8 +9,12 @@ import entitys.HibernateUtil;
 import java.io.Serializable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import entitys.Tipousuario;
+import entitys.Tipo;
 import xml.XMLActions;
+import Complementos.cifrarContrasenas;
+import java.io.UnsupportedEncodingException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -76,23 +80,89 @@ public class AgregarUsuario implements Serializable {
         this.contrasena = contrasena;
     }
     
-    public String execute(){
+    public String execute() throws UnsupportedEncodingException{
         Session hibernateSession;
         hibernateSession = HibernateUtil.getSessionFactory().openSession(); 
-        Transaction t = hibernateSession.beginTransaction();     
+        Transaction t = hibernateSession.beginTransaction();   
+        
+        cifrarContrasenas c = new cifrarContrasenas();
+        
+        String nombre = this.nombres + this.apellidoPat + this.apellidoMat;
+        
+        XMLActions xml = new XMLActions();
+        
+        Grupo grupo = new Grupo("",2019,"","");
+        
+        Set grupos = new HashSet(0);
+        Profesor profe = new Profesor("xml/Profesor" + nombre + "/preguntas.xml", "xml/Profesor" + nombre + "/ejercicios.xml", "xml/Profesor" + nombre + "/examenes.xml", grupos);
+        grupo.setProfesor(profe);
+        
+        Alumno alum = new Alumno(grupo, "xml/Alumno" + nombre + "/respuestas.xml");
+        
+        Tipo tu = (Tipo)hibernateSession.load(Tipo.class, this.tipousuario);
+        Usuario user = new Usuario(tu, this.nombres, this.apellidoPat, this.apellidoMat, this.nombreUsuario, c.encriptar(this.contrasena));
+        
+        xml.crearXMLEjercicio(nombre);
+        profe.setUsuario(user);
+        
+        alum.setUsuario(user);
+        
+        user.setAlumno(alum);
+        user.setProfesor(profe);
+        
+        if(this.tipousuario == 2){
+            if(xml.crearXMLExamen(nombre)){
+                System.out.println("XML Examen creado");
+            }
+            else{
+                System.out.println("No lo cree jeje");
+            }
+            
+            if(xml.crearXMLPregunta(nombre)){
+                System.out.println("XML Preguntas creado");
+            }
+            else{
+                System.out.println("No lo cree jeje");
+            }
+            
+            if(xml.crearXMLEjercicio(nombre)){
+                System.out.println("XML Ejercicio creado");
+            }
+            else{
+                System.out.println("No lo cree jeje");
+            }
+            hibernateSession.save(profe);
+
+        }
+        
+        if(this.tipousuario == 3){ //Alumno
+            hibernateSession.save(alum);
+        }
+        
+        hibernateSession.save(user);
+        t.commit();
+        return SUCCESS;
+    }    
+}
+/*
+    public String execute() throws UnsupportedEncodingException{
+        Session hibernateSession;
+        hibernateSession = HibernateUtil.getSessionFactory().openSession(); 
+        Transaction t = hibernateSession.beginTransaction();   
+        
+        cifrarContrasenas c = new cifrarContrasenas();
+        
         Usuario user = new Usuario();
         
         user.setIdUsuario(0);
         user.setNombreUsuario(nombreUsuario);
-        user.setNombres(nombres);
-        user.setApellidoPat(apellidoPat);
-        user.setApellidoMat(apellidoMat);
-        user.setContrasena(contrasena);
+        user.setNombre(nombres);
+        user.setApPaterno(apellidoPat);
+        user.setApMat(apellidoMat);
+        user.setContrasena(c.encriptar(this.contrasena));
         
-        Tipousuario tu = new Tipousuario();
-        tu.setIdTipoUsuario(tipousuario);
-        
-        user.setTipousuario(tu);
+        Tipo tu = (Tipo)hibernateSession.load(Tipo.class, this.tipousuario);
+        user.setTipo(tu);
         
         hibernateSession.save(user);
         t.commit();
@@ -142,3 +212,4 @@ public class AgregarUsuario implements Serializable {
         return SUCCESS;
     }    
 }
+*/

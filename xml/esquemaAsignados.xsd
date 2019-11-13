@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="asignados" type="datos"/>
+	<xs:complexType name="datos">
+		<xs:sequence>
+			<xs:element name="examenes" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="examen" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="numeroExamen" type="xs:integer"/>
+										<xs:attribute name="grupoCompleto">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="si"/>
+													<xs:pattern value="no"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:attribute>
+										<xs:attribute name="numeroAlumno" type="xs:string"/>
+										<xs:attribute name="grupo" type="xs:string"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ejercicios" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ejercicio" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="numeroEjercicio" type="xs:integer"/>
+										<xs:attribute name="grupoCompleto">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="si"/>
+													<xs:pattern value="no"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:attribute>
+										<xs:attribute name="numeroAlumno" type="xs:string"/>
+										<xs:attribute name="grupo" type="xs:string"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="preguntas" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="pregunta" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="numeroPregunta" type="xs:integer"/>
+										<xs:attribute name="grupoCompleto">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="si"/>
+													<xs:pattern value="no"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:attribute>
+										<xs:attribute name="numeroAlumno" type="xs:string"/>
+										<xs:attribute name="grupo" type="xs:string"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -23,68 +23,35 @@
   <div id="navegaProfe"></div>
   <br>
 
-  <nav aria-label="breadcrumb" class="contenido-chico">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a class="btn btn-primary" href="creaEjercicio.html">Crear un ejercicio nuevo</a></li>
-        <li class="breadcrumb-item" aria-current="page"><button id="muestraEjercicio" class="btn btn-success">Muestra ejercicios</button></li>
-      </ol>
-  </nav>
+  <center>
+    <button class="btn btn-danger" onclick="redirecciona()">Crear un ejercicio nuevo</button>
+   <button onclick="muestraEjercicio()" class="btn btn-success">Muestra ejercicios</button>
+  </center>
+  
   <br><br><br>
 
-  <div id="text">
+  <div id="text" class="container">
     <table id="demo" class="table table-hover table-dark">
     </table>
   </div>
 
-  <script>
-    document.getElementById("muestraEjercicio").addEventListener("click", cargarTabla);
-    function cargarTabla() {
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        cargarXML(this);
-      };
-      xhr.open("GET", "../xml/ejercicios.xml", true);
-      xhr.send();
-    }
-
-    function cargarXML(xml) {
-      var docXML = xml.responseXML;
-      console.log(docXML)
-      var tabla = "<tr><th scope='col'>#</th><th scope='col'>Nombre del ejercicio</th><th scope='col'>Accionnes</th></tr>"
-      var ejercicio = docXML.getElementsByTagName("ejercicio");
-      console.log(ejercicio)
-      for (var i = 0; i < ejercicio.length; i++) {
-        tabla += "<tr><th socpe='row'>";
-        tabla += (i + 1);
-        tabla += "</th><td>";
-        tabla += ejercicio[i].getAttribute("nombre");
-        tabla += "</td>";
-        tabla += "<td><a class='btn btn-primary' href='infoEjercicio.html?numero="+(i+1)+"'>Ver ejercicio</a>";
-        tabla += "<a class='btn btn-warning' href='modificaEjercicio.html?numero="+(i+1)+"' >Modificar</a>";
-        tabla += "<button type='button' class='btn btn-danger' onclick='eliminaClick("+(i+1)+")'>Eliminar</button>";
-        tabla += "</td></tr>"
+  <script type="text/javascript" src="js/muestraEjercicio.js"></script>
+  <script type="text/javascript">
+      function redirecciona(){
+        var id=getParameterByName("id");
+        window.location.href='http://localhost:8080/ProjectFinalStruts/Profesor/creaEjercicio.html?id='+id;
       }
-      document.getElementById("demo").innerHTML = tabla;
-    }
-
-    function eliminaClick(numero){
-      var opcion = confirm("Desea eliminar el ejercicio: "+numero);
-      console.log(opcion);
-      if(opcion==true){
-        let url = 'http://localhost:8080/ProjectFinalStruts/BorraEjercicio?numero='+numero;
-        alert('URL:' + url);
-        fetch(url).then(response => response.text()).then(data => {
-            alert(data);    
-            cargarTabla()
-        });
+      
+      function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
-        
-    }
   </script>
-
   <div id="alerta">
 
   </div>
-<script type="text/javascript" src="js_react/verEj.js"></script></body>
+<script type="text/javascript" src="js_react/verEjercicio.js"></script></body>
 
 </html>

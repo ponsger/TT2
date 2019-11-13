@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<examenes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Users/Irma%20Pons/Documents/xml/datos%20bien/examen/esquemaExamen2.xsd">
-	<examen fecha="2019-30-08" nombre="Primer parcial 2019">
+<examenes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Users/gerpo/OneDrive/Escritorio/xml/esquemaExamen.xsd">
+<examen fecha="2019-30-08" nombre="Primer parcial 2019" numero="1">
 		<ejercicio numero="1"></ejercicio>
 		<ejercicio numero="3"></ejercicio>
 	</examen>
-	<examen fecha="2019-15-10" nombre="Segundo parcial 2019">
+	<examen fecha="2019-15-10" nombre="Segundo parcial 2019" numero="2">
 		<ejercicio numero="2"></ejercicio>
 		<ejercicio numero="3"></ejercicio>
 	</examen>
-	<examen fecha="2019-08-11" nombre="Tercer parcial 2019">
+	<examen fecha="2019-08-11" nombre="Tercer parcial 2019" numero="3">
 		<ejercicio numero="1"></ejercicio>
 		<ejercicio numero="2"></ejercicio>
-		<ejercicio numero="2"></ejercicio>
+		<pregunta numero="3"></pregunta>
 	</examen>
-	
 </examenes>
+

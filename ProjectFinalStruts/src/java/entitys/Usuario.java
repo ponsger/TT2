@@ -1,5 +1,5 @@
 package entitys;
-// Generated 25/10/2019 05:16:54 AM by Hibernate Tools 4.3.1
+// Generated 11/11/2019 08:09:09 PM by Hibernate Tools 4.3.1
 
 
 
@@ -10,25 +10,37 @@ public class Usuario  implements java.io.Serializable {
 
 
      private Integer idUsuario;
-     private Tipousuario tipousuario;
-     private String nombres;
-     private String apellidoPat;
-     private String apellidoMat;
+     private Tipo tipo;
+     private String nombre;
+     private String apPaterno;
+     private String apMat;
      private String nombreUsuario;
      private String contrasena;
+     private Profesor profesor;
+     private Alumno alumno;
 
     public Usuario() {
     }
 
-    public Usuario(Tipousuario tipousuario, String nombres, String apellidoPat, String apellidoMat, String nombreUsuario, String contrasena) {
-       this.tipousuario = tipousuario;
-       this.nombres = nombres;
-       this.apellidoPat = apellidoPat;
-       this.apellidoMat = apellidoMat;
+    public Usuario(Tipo tipo, String nombre, String apPaterno, String apMat, String nombreUsuario, String contrasena, Profesor profesor, Alumno alumno) {
+       this.tipo = tipo;
+       this.nombre = nombre;
+       this.apPaterno = apPaterno;
+       this.apMat = apMat;
+       this.nombreUsuario = nombreUsuario;
+       this.contrasena = contrasena;
+       this.profesor = profesor;
+       this.alumno = alumno;
+    }
+   
+    public Usuario(Tipo tipo, String nombre, String apPaterno, String apMat, String nombreUsuario, String contrasena) {
+       this.tipo = tipo;
+       this.nombre = nombre;
+       this.apPaterno = apPaterno;
+       this.apMat = apMat;
        this.nombreUsuario = nombreUsuario;
        this.contrasena = contrasena;
     }
-   
     public Integer getIdUsuario() {
         return this.idUsuario;
     }
@@ -36,33 +48,33 @@ public class Usuario  implements java.io.Serializable {
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
-    public Tipousuario getTipousuario() {
-        return this.tipousuario;
+    public Tipo getTipo() {
+        return this.tipo;
     }
     
-    public void setTipousuario(Tipousuario tipousuario) {
-        this.tipousuario = tipousuario;
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
-    public String getNombres() {
-        return this.nombres;
-    }
-    
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-    public String getApellidoPat() {
-        return this.apellidoPat;
+    public String getNombre() {
+        return this.nombre;
     }
     
-    public void setApellidoPat(String apellidoPat) {
-        this.apellidoPat = apellidoPat;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
-    public String getApellidoMat() {
-        return this.apellidoMat;
+    public String getApPaterno() {
+        return this.apPaterno;
     }
     
-    public void setApellidoMat(String apellidoMat) {
-        this.apellidoMat = apellidoMat;
+    public void setApPaterno(String apPaterno) {
+        this.apPaterno = apPaterno;
+    }
+    public String getApMat() {
+        return this.apMat;
+    }
+    
+    public void setApMat(String apMat) {
+        this.apMat = apMat;
     }
     public String getNombreUsuario() {
         return this.nombreUsuario;
@@ -77,6 +89,20 @@ public class Usuario  implements java.io.Serializable {
     
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+    public Profesor getProfesor() {
+        return this.profesor;
+    }
+    
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
+    public Alumno getAlumno() {
+        return this.alumno;
+    }
+    
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 
 

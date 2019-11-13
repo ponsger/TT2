@@ -21,11 +21,48 @@
     <noscript>Necesitas habilitar JavaScript para ejecutar la aplicación.</noscript>
     <div id="welcome"></div>
     <div id="navega"></div>
-    <br>
+    <br><br>
     <div id="opciones"></div>
     <div id="modificaUsuario"></div>
     <div id="profesor"></div>
     <div id="alumno"></div>
     <div id="grupo"></div>
+    
+    
+    <center>
+      <br>
+      <br>
+    <div class="container container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <button class="btn btn-danger" onclick="muestraAlumnosSinGrupo()">Mostar alumnos sin grupo</button>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-success" onclick="muestraProfesores()">Mostrar profesores</button>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-warning" onclick="muestraGrupos()">Mostrar grupos</button>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-info" onclick="muestraGrupoSinProfe()">Mostrar grupos sin profesor</button>
+            </div>
+        </div>
+    </div>
+  </center>
+  
+  <div id="tabla1"></div>
+  <div id="tabla2"></div>
+  <div id="tabla3"></div>
+  <div id="tabla4"></div>
+  
+  
+  
+  <script type="text/javascript" src="js/muestraAlumnosSinGrupo.js"></script>  <!--Tabla 1 --> 
+  <script type="text/javascript" src="js/muestraGrupos.js"></script>  <!--Tabla 2 --> 
+  <script type="text/javascript" src="js/muestraProfesores.js"></script>  <!--Tabla 3 --> 
+  <script type="text/javascript" src="js/muestraGrupoSinProfe.js"></script>  <!--Tabla 4 --> 
+  
+    <div id="etiquetaAyuda1"></div>
+    <div id="etiquetaAyuda2"></div>
   <script type="text/javascript" src="js_react/agregarUsuario.js"></script></body>
 </html>

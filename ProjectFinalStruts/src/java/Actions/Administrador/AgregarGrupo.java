@@ -75,7 +75,7 @@ public class AgregarGrupo implements Serializable{
         XMLActions xml = new XMLActions();
         
         if(xml.crearXMLAsignado(nombre)){
-            grupo.setRutaXMLAsignados("xml/Grupo" + nombre + "/asignados.xml");
+            grupo.setRutaXmlasignados("xml/Grupo" + nombre + "/asignados.xml");
         }
         
         hibernateSession.save(grupo);

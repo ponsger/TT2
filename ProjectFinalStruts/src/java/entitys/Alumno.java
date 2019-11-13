@@ -1,5 +1,5 @@
 package entitys;
-// Generated 25/10/2019 05:16:54 AM by Hibernate Tools 4.3.1
+// Generated 11/11/2019 08:09:09 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,7 +9,7 @@ package entitys;
 public class Alumno  implements java.io.Serializable {
 
 
-     private int idUsuario;
+     private Integer idUsuario;
      private Grupo grupo;
      private Usuario usuario;
      private String rutaXmlrespuestas;
@@ -18,8 +18,7 @@ public class Alumno  implements java.io.Serializable {
     }
 
 	
-    public Alumno(Grupo grupo, Usuario usuario) {
-        this.grupo = grupo;
+    public Alumno(Usuario usuario) {
         this.usuario = usuario;
     }
     public Alumno(Grupo grupo, Usuario usuario, String rutaXmlrespuestas) {
@@ -27,12 +26,17 @@ public class Alumno  implements java.io.Serializable {
        this.usuario = usuario;
        this.rutaXmlrespuestas = rutaXmlrespuestas;
     }
+    
+    public Alumno(Grupo grupo, String rutaXmlrespuestas) {
+       this.grupo = grupo;
+       this.rutaXmlrespuestas = rutaXmlrespuestas;
+    }
    
-    public int getIdUsuario() {
+    public Integer getIdUsuario() {
         return this.idUsuario;
     }
     
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
     public Grupo getGrupo() {

@@ -25,11 +25,15 @@
   <br>
   <div id="text">
       <center>
-    <button id="muestraEjercicio" class="btn btn-info">Muestra ejercicios </button>
+    <button id="muestraEjercicio" class="btn btn-danger">Muestra ejercicios </button>
+    <button class="btn btn-warning" onclick="muestraPregunta()">Muestra preguntas</button>
     <br><br>
       <input id="nombreExamen" type="text" placeholder="Ingresa el nombre del examen" class="form-control border-primary contenido-chico" name="nombre" />
       <br><br>
       <table id="demo" class="table table-hover table-dark contenido-mediano">
+      </table>
+      <br><br>
+      <table id="preguntas" class="table table-hover table-dark contenido-mediano">
       </table>
         <br>
         <input type="submit" class="btn btn-success" value="Guardar" onclick="generaExamen()"/>
@@ -38,6 +42,39 @@
 
   <script>
     document.getElementById("muestraEjercicio").addEventListener("click",cargarTabla);
+    var ayuda=0;
+    function muestraPregunta(){
+       var xhr=new XMLHttpRequest();
+      xhr.onreadystatechange=function(){
+        cargarXMLPregunta(this);
+      };
+      xhr.open("GET","../xml/preguntas.xml",true);
+      xhr.send(); 
+    }
+    
+    function cargarXMLPregunta(xml){
+        var docXML=xml.responseXML;
+        var numero;
+      var tabla="<tr><th class='bg-warning' scope='col'>Seleccionar</th><th class='bg-warning' scope='col'>Cuestionamiento</th><th class='bg-warning' scope='col'>Acción</th></tr>"
+      var pregunta=docXML.getElementsByTagName("pregunta");
+      console.log(pregunta)
+      var prueba;
+      for(var i=0;i<pregunta.length;i++){
+        tabla+="<tr><th socpe='row'>";
+        tabla+="<center><input type='checkbox' class='form-check-input' value='"+(i+1)+"' /></center>";
+        tabla+="</th><td>";
+        prueba=pregunta[i].getElementsByTagName("cuestionamiento")[0];
+        console.log(prueba)
+        tabla+=pregunta[i].getElementsByTagName("cuestionamiento")[0].textContent;
+        tabla+="</td>";
+        numero=pregunta[i].getAttribute("numero");
+        tabla+="<td><a type='button' href='infoPregunta.html?numero="+numero+"' class='btn btn-primary'>Ver pregunta</a>";
+        tabla+="</td></tr>"
+      }
+      document.getElementById("preguntas").innerHTML=tabla;
+    }
+    
+    
     function cargarTabla(){
       var xhr=new XMLHttpRequest();
       xhr.onreadystatechange=function(){
@@ -49,7 +86,7 @@
 
     function cargarXML(xml){
       var docXML=xml.responseXML;
-      var tabla="<tr><th scope='col'>Seleccionar</th><th scope='col'>Nombre del ejercicio</th><th scope='col'>Acción</th></tr>"
+      var tabla="<tr><th scope='col' class='bg-danger'>Seleccionar</th><th class='bg-danger' scope='col'>Nombre del ejercicio</th><th scope='col' class='bg-danger'>Acción</th></tr>"
       var ejercicio=docXML.getElementsByTagName("ejercicio");
       for(var i=0;i<ejercicio.length;i++){
         tabla+="<tr><th socpe='row'>";
@@ -58,45 +95,85 @@
         tabla+=ejercicio[i].getAttribute("nombre");
         tabla+="</td>";
         tabla+="<td><a type='button' href='infoEjercicio.html?numero="+(i+1)+"' class='btn btn-primary'>Ver ejercicio</a>";
-        tabla+="</td></tr>"
+        tabla+="</td></tr>" 
+        ayuda++;
       }
       document.getElementById("demo").innerHTML=tabla;
     }
 
     function generaExamen(){
         var nombre=document.getElementById("nombreExamen").value;
-        alert(nombre)
+        alert(ayuda)
+        //alert(nombre)
         var input=document.getElementsByTagName("input");
-        var seleccionados= new Array()
+        var seleccionadosEjercicio= new Array()
+        var seleccionadosPregunta= new Array()
         for(i=0;i<input.length;i++){
-          if(input[i].checked==true){
-            seleccionados.push(input[i])
-          }
-        }
-        console.log("Imprimiendo los seleccionados")
-        console.log(seleccionados.length)
-        var numeros="";
-        for(i=0;i<seleccionados.length;i++){
-            if(i===0)
-                numeros+=seleccionados[i].value;
-            else{
-                numeros+=",";
-                numeros+=seleccionados[i].value;
+            if(ayuda===0){
+                if(input[i].checked==true){
+                     seleccionadosPregunta.push(input[i])
+                }
+            }else{
+                if(i<=ayuda){
+                    if(input[i].checked==true){
+                         seleccionadosEjercicio.push(input[i])
+                    }
+                }else{
+                    if(input[i].checked==true){
+                         seleccionadosPregunta.push(input[i])
+                    }
+                }
             }
         }
-        console.log(numeros)
-        creaExamen(numeros,nombre);
+        console.log("Imprimiendo los seleccionados")
+        console.log("Seleccionados pregunta: "+seleccionadosPregunta.length)
+        console.log("Seleccionados ejercicios: "+seleccionadosEjercicio.length)
+        var numerosPregunta="";
+        var numerosEjercicio="";
+        for(i=0;i<seleccionadosPregunta.length;i++){
+            if(i===0)
+                numerosPregunta+=seleccionadosPregunta[i].value;
+            else{
+                numerosPregunta+=",";
+                numerosPregunta+=seleccionadosPregunta[i].value;
+            }
+        }
+        
+        for(i=0;i<seleccionadosEjercicio.length;i++){
+            if(i===0)
+                numerosEjercicio+=seleccionadosEjercicio[i].value;
+            else{
+                numerosEjercicio+=",";
+                numerosEjercicio+=seleccionadosEjercicio[i].value;
+            }
+        }
+        
+        creaExamen(numerosPregunta,nombre,numerosEjercicio);
     }
     
-    function creaExamen(numeros,nombre){
-        console.log("Numeros: "+numeros)
+    function creaExamen(numerosP,nombre,numerosE){
+        console.log("Numeros ejercicio: "+numerosE)
+        console.log("Numeros ejercicio: "+numerosP)
+        var id=getParameterByName("id")
+        console.log(id)
         //http://localhost/struts2react/input1.jsp
-        let url = 'http://localhost:8080/ProjectFinalStruts/AgregaExamen?numeros='+numeros+'&nombre='+nombre;
-        alert('URL:' + url);
+        let url = 'http://localhost:8080/ProjectFinalStruts/AgregarEjerciciosAExamen?idProfesor='+id+'&numeros='+numerosE+'&nombre='+nombre;
+        //alert('URL:' + url);
         fetch(url).then(response => response.text()).then(data => {
             alert(data);
-            
         });
+        let url2 = 'http://localhost:8080/ProjectFinalStruts/AgregarPreguntasAExamen?idProfesor='+id+'&numeros='+numerosP+'&nombre='+nombre;
+        fetch(url2).then(response => response.text()).then(data => {
+            alert(data);
+        });
+        
+    }
+    
+    function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
   </script>
@@ -104,5 +181,5 @@
   <div id="alerta">
     
   </div>
-<script type="text/javascript" src="js_react/addEx.js"></script></body>
+<script type="text/javascript" src="js_react/agregaExamen.js"></script></body>
 </html>

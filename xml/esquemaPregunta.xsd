@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="preguntas" type="datos"/>
+	<xs:complexType name="datos">
+		<xs:sequence>
+			<xs:element name="pregunta" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="cuestionamiento" type="xs:string"/>
+						<xs:element name="respuesta" type="xs:string"/>
+					</xs:sequence>
+					<xs:attribute name="numero" type="xs:integer" use="required"/>
+					<xs:attribute name="tipo" type="xs:string" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

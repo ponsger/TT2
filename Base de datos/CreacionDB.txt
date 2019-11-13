@@ -25,7 +25,7 @@ CREATE TABLE  Usuario (
 ENGINE = InnoDB;
 
 CREATE TABLE  Profesor (
-  idUsuario INT NOT NULL,
+  idUsuario INT NOT NULL AUTO_INCREMENT,
   RutaXMLPreguntas VARCHAR(45) NULL,
   RutaXMLEjercicios VARCHAR(45) NULL,
   RutaXMLExamen VARCHAR(45) NULL,
@@ -43,7 +43,7 @@ CREATE TABLE  Grupo (
   Ano INT NULL,
   Turno VARCHAR(45) NULL,
   RutaXMLAsignados VARCHAR(45) NULL,
-  idProfesor INT NOT NULL,
+  idProfesor INT NULL,
   PRIMARY KEY (idGrupo),
   INDEX fk_Grupo_Profesor1_idx (idProfesor ASC),
   CONSTRAINT fk_Grupo_Profesor1
@@ -54,9 +54,9 @@ CREATE TABLE  Grupo (
 ENGINE = InnoDB;
 
 CREATE TABLE  Alumno (
-  idGrupo INT NOT NULL,
+  idUsuario INT NOT NULL AUTO_INCREMENT,
+  idGrupo INT NULL,
   RutaXMLRespuestas VARCHAR(45) NULL,
-  idUsuario INT NOT NULL,
   PRIMARY KEY (idUsuario),
   INDEX fk_Alumno_Grupo1_idx (idGrupo ASC),
   CONSTRAINT fk_Alumno_Usuario1

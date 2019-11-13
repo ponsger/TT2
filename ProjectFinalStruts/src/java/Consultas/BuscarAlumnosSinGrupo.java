@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import static Complementos.Operaciones.*;
 import entitys.Usuario;
 import java.util.Iterator;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.Query;
 
 /**
@@ -27,8 +28,9 @@ public class BuscarAlumnosSinGrupo {
         Query query = hibernateSession.createQuery(hql);
         Iterator results = query.iterate();
         
+        JSONObject raiz = new JSONObject();
         JSONObject obj = new JSONObject();
-        
+        int contador=0;
         while(results.hasNext()){
             Alumno alumno = (Alumno)results.next();
             int idGrupo = alumno.getGrupo().getIdGrupo();
@@ -36,14 +38,22 @@ public class BuscarAlumnosSinGrupo {
             if(idGrupo == 0){
                 Usuario usuario = (Usuario)hibernateSession.load(Usuario.class, alumno.getIdUsuario());
                 JSONObject innerObj = new JSONObject();
-                innerObj.put("nombre", usuario.getNombres());
-                obj.put(alumno.getIdUsuario(), innerObj);
+                innerObj.put("nombre", usuario.getNombre());
+                innerObj.put("id", usuario.getIdUsuario());
+                innerObj.put("apPat",usuario.getApPaterno());
+                innerObj.put("apMat",usuario.getApMat());
+                obj.put(contador, innerObj);
+                raiz.put("idAlumno", obj);
+                contador++;
             }
         }
-        
         try{
-            FileWriter file = new FileWriter("C:\\jars\\json\\resultadoConsulta.json");
-            file.write(obj.toJSONString());
+            String hola=ServletActionContext.getServletContext().getRealPath("/json");
+            System.out.println("***************************************************************");
+            System.out.println(hola);
+           
+            FileWriter file = new FileWriter(ServletActionContext.getServletContext().getRealPath("/json/resultadoConsultaAlumnoSinGrupo.json"));
+            file.write(raiz.toJSONString());
             file.flush();
             file.close();
         

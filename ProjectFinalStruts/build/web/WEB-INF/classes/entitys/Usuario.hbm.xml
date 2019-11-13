@@ -1,30 +1,32 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 25/10/2019 05:16:54 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 11/11/2019 08:09:10 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="entitys.Usuario" table="usuario" catalog="trabajoterminal">
+    <class name="entitys.Usuario" table="usuario" catalog="trabajoterminal" optimistic-lock="version">
         <id name="idUsuario" type="java.lang.Integer">
             <column name="idUsuario" />
-            <generator class="identity"></generator>
+            <generator class="identity" />
         </id>
-        <many-to-one name="tipousuario" class="entitys.Tipousuario" fetch="select">
-            <column name="idTipoUsuario" />
+        <many-to-one name="tipo" class="entitys.Tipo" fetch="select">
+            <column name="idTipo" />
         </many-to-one>
-        <property name="nombres" type="string">
-            <column name="Nombres" length="45" />
+        <property name="nombre" type="string">
+            <column name="Nombre" length="45" />
         </property>
-        <property name="apellidoPat" type="string">
-            <column name="Apellido_Pat" length="45" />
+        <property name="apPaterno" type="string">
+            <column name="Ap_Paterno" length="45" />
         </property>
-        <property name="apellidoMat" type="string">
-            <column name="Apellido_Mat" length="45" />
+        <property name="apMat" type="string">
+            <column name="Ap_Mat" length="45" />
         </property>
         <property name="nombreUsuario" type="string">
             <column name="NombreUsuario" length="45" />
         </property>
         <property name="contrasena" type="string">
-            <column name="contrasena" length="45" />
+            <column name="Contrasena" length="45" />
         </property>
+        <one-to-one name="profesor" class="entitys.Profesor"></one-to-one>
+        <one-to-one name="alumno" class="entitys.Alumno"></one-to-one>
     </class>
 </hibernate-mapping>

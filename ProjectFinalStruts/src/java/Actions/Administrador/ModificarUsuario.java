@@ -76,9 +76,9 @@ public class ModificarUsuario implements Serializable{
         Usuario user = (Usuario)hibernateSession.load(Usuario.class, this.id);
         
         user.setNombreUsuario(nombreUsuario);
-        user.setNombres(nombres);
-        user.setApellidoPat(apellidoPat);
-        user.setApellidoMat(apellidoMat);
+        user.setNombre(nombres);
+        user.setApPaterno(apellidoPat);
+        user.setApMat(apellidoMat);
         user.setContrasena(contrasena);
         
         hibernateSession.update(user);

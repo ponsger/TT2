@@ -14,20 +14,32 @@
 <body class="fondo-azulado">
   <noscript>Necesitas habilitar JavaScript para ejecutar la aplicación.</noscript>
   <div id="welcome"></div>
-  <div class="card align-items-center chico">
-    <a class="btn btn-light" href="verExamen.html">Mostrar Examenes</a>
-    <a class="btn btn-light" href="agregaExamen.html">Crear examen</a>
+<center>
+  <div class="align-items-center container">
+      <div class="row">
+          <div class="col-6">
+              <a class="btn btn-dark" href="verExamen.html">Mostrar Examenes</a>
+          </div>
+          <div class="col-6">
+              <a class="btn btn-dark" href="agregaExamen.html">Crear examen</a>
+          </div>
+      </div>
   </div>
-  <center><button id="muestraExamen" class="btn btn-success">Cargar Datos del examen</button></center>
+</center>
   <br>
-  <div class="card">
-    <div class="card-header">
-      <p class="h3">Información del examen</p>
-    </div>
-    <div id="cuerpo" class="card-body">
-
+  <center><button id="muestraExamen" class="btn btn-success btn-lg">Cargar Datos del examen</button></center>
+  <br>
+  <center>
+  <div class="container-fluid">
+      <div class="card">
+        <div class="card-header">
+            <p class="h3">Información del examen</p>
+        </div>
+      <div id="cuerpo" class="card-body">
     </div>
   </div>
+  </div>
+      </center>
     <script type="text/javascript">
       document.getElementById("muestraExamen").addEventListener("click", cargaDatos);
       var num;
@@ -39,32 +51,29 @@
       }
 
       function cargaDatos() {
-        var numero = getParameterByName('numero');
-        num=numero;
-        console.log(numero)
-        cargarTodo(numero);
+        XMLEjercicios();
       }
 
-      function cargarTodo(numero) {
+      function cargarExamen(numero,ejercicios) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
-          cargarXML(this, numero);
+          cargarXMLExamen(this, numero,ejercicios);
         };
         xhr.open("GET", "../xml/examenes.xml", true);
         xhr.send();
       }
 
-      function cargarXML(xml) {
+      function cargarXMLExamen(xml,numero,ejercicios) {
         var docXML = xml.responseXML;
         var infoExamen = '';
         var examen = docXML.getElementsByTagName("examen");
-        console.log("Elementos en memoria")
-        console.log(examen)
-        console.log(examen[num-1])
+        //console.log("Elementos en memoria")
+        //console.log(examen)
+        //console.log(examen[num-1])
         var nombre=examen[num-1].getAttribute("nombre");
         var fecha=examen[num-1].getAttribute("fecha");
-        console.log("Nombre de examen: "+nombre)
-        console.log("Fecha: "+fecha)
+        //console.log("Nombre de examen: "+nombre)
+        //console.log("Fecha: "+fecha)
         infoExamen +="<div class='card-columns'>";
         infoExamen+="<label class='h2'>Nombre del examen: </label><input type='text' class='form-control' value='"+nombre+"' readOnly/>";
         infoExamen +="</div>";
@@ -72,11 +81,18 @@
         infoExamen+="<label class='h2'>Fecha del examen: </label><input type='text' class='form-control' value='"+fecha+"' readOnly/>";
         infoExamen +="</div>";
         infoExamen+="<hr class='bg-warning'>"
-        var ejercicios=examen[num-1].getElementsByTagName("ejercicio");
-        console.log()
+        var ejerciciosExamen=examen[num-1].getElementsByTagName("ejercicio");
+        console.log("Los ejercicios son del examen son:")
+        console.log(ejerciciosExamen)
+        console.log("Aqui esta: ")
+        //console.log("Ejercicios del archivo")
+        //console.log(ejercicios)
+        
+        
         for(var i=0;i<ejercicios.length;i++){
-            console.log(ejercicios[i])
-          var nombreEjercicio=ejercicios[i].getAttribute("nombre");
+            for(var x=0;x<ejerciciosExamen.length;x++){
+               if(ejerciciosExamen[x].attributes.numero.value===ejercicios[i].attributes.numero.value){
+                var nombreEjercicio=ejercicios[i].getAttribute("nombre");
           var ins=ejercicios[i].getElementsByTagName("indicaciones")[0].textContent;
           var opcion1=ejercicios[i].getElementsByTagName("opcion")[0].textContent;
           var opcion2=ejercicios[i].getElementsByTagName("opcion")[1].textContent;
@@ -101,9 +117,38 @@
           infoExamen+="<div class='card-columns'><label class='lead'>Opcion 4: </label><input type='text' class='form-control' value='"+opcion4+"' readOnly/><br></div>";
           infoExamen+="<hr><div class='card-columns'><label class='lead'>Resultado: </label><input type='text' class='form-control' value='"+resultado+"' readOnly/><br></div>";
           infoExamen+="<hr class='bg-primary'>";
+            }else{
+                continue;
+            } 
+            }
+            if(ejerciciosExamen[i]===undefined){
+                break;
+            }
+            
+          
         }
             document.getElementById("cuerpo").innerHTML=infoExamen;
       }
+      
+      function XMLEjercicios(){
+          var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          cargarXMLEjercicios(this);
+        };
+        xhr.open("GET", "../xml/ejercicios.xml", true);
+        xhr.send();
+      }
+      
+      function cargarXMLEjercicios(xml){
+        var docXML = xml.responseXML;
+        var ejercicios = docXML.getElementsByTagName("ejercicio");
+        console.log("Ejercicios en memoria")
+        var numero = getParameterByName('numero');
+        num=numero;
+        console.log(numero)
+        cargarExamen(numero,ejercicios);
+      }
+      
     </script>
     <script type="text/javascript" src="js_react/infoEj.js"></script>
 </body>

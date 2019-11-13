@@ -3,7 +3,7 @@ package Actions;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
 import entitys.Usuario;
-import entitys.Tipousuario;
+import entitys.Tipo;
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -19,7 +19,7 @@ public class Login extends ActionSupport implements SessionAware{
     String usuario, contra;
     int id;
     private Usuario dato;
-    private Tipousuario tipo;
+    private Tipo tipo;
 
     //Para añadir a la sesión
     private SessionMap<String, Object> sessionMap;
@@ -63,7 +63,7 @@ public class Login extends ActionSupport implements SessionAware{
     @Override
     public String execute() {
         if(this.checkUser()){
-            switch(tipo.getIdTipoUsuario()){
+            switch(tipo.getIdTipo()){
                 case 1:
                     return ADMINISTRADOR;
                 case 2:
@@ -89,7 +89,7 @@ public class Login extends ActionSupport implements SessionAware{
         if (list.size() == 1) { //si solo es uno sucess
             dato = (Usuario) query.uniqueResult();  //obtengo ese usuario que obtuve
             id = dato.getIdUsuario();
-            tipo = dato.getTipousuario();           //otengo el tipo de usuario            
+            tipo = dato.getTipo();           //otengo el tipo de usuario            
             sessionMap.put("idUsuario", id);        //Para agregar el usuario a la sesión
             return true;
 

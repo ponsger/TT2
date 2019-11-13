@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 25/10/2019 05:16:54 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 11/11/2019 08:09:10 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Entity.Profesor" table="profesor" catalog="trabajoterminal" optimistic-lock="version">
-        <id name="idUsuario" type="int">
+    <class name="entitys.Profesor" table="profesor" catalog="trabajoterminal" optimistic-lock="version">
+        <id name="idUsuario" type="java.lang.Integer">
             <column name="idUsuario" />
             <generator class="foreign">
                 <param name="property">usuario</param>
             </generator>
         </id>
-        <one-to-one name="usuario" class="Entity.Usuario" constrained="true"></one-to-one>
+        <one-to-one name="usuario" class="entitys.Usuario" constrained="true"></one-to-one>
         <property name="rutaXmlpreguntas" type="string">
             <column name="RutaXMLPreguntas" length="45" />
         </property>
@@ -22,9 +22,9 @@
         </property>
         <set name="grupos" table="grupo" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idProfesor" not-null="true" />
+                <column name="idProfesor" />
             </key>
-            <one-to-many class="Entity.Grupo" />
+            <one-to-many class="entitys.Grupo" />
         </set>
     </class>
 </hibernate-mapping>
